@@ -1,0 +1,6 @@
+adapter: postgresql
+encoding: utf8
+database:
+username:
+password:
+host: localhost
