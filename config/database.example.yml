@@ -1,6 +1,4 @@
-adapter: postgresql
-encoding: utf8
-database:
-username:
-password:
-host: localhost
+adapter: sqlite3
+database: db/*.sqlite3
+pool: 5
+timeout: 5000
