@@ -33,9 +33,10 @@ class ManageBuildingParser
     proxy_ip_rotator.kill
   end
 
-  def self.links_for(keyword, start = 1)
+  def self.links_for(keyword, start = 11)
     question = "site:managebuilding.com/Resident/PublicPages/ContactUs.aspx+#{keyword}"
-    links, total_results = GoogleCustomSearch.response_links_with_total_results(question, start)
+    links, total_results = GoogleCustomSearch.response_links_with_total_results(question, 1)
+    LOGGER.info "#{total_results} total results for #{keyword}"
     while start <= 91 && start <= total_results
       ret = 5
       begin
