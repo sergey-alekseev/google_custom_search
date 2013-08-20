@@ -11,8 +11,8 @@ require 'active_record'
 class ManageBuildingParser
   # TODO: remove LOGGER instantiating in several files somehow
   LOGGER = LogFactory.logger('GCS')
-  CONTACT_LINK_REGEX = /https:\/\/([\w-]+).managebuilding.com\/Resident\/PublicPages\/ContactUs.aspx/i
-  SUBDOMAIN_REGEX = /(https:\/\/)?(.*managebuilding\.com)/
+  CONTACT_LINK_REGEX = /https?:\/\/([\w-]+).managebuilding.com\/Resident\/PublicPages\/ContactUs.aspx/i
+  SUBDOMAIN_REGEX = /(https?:\/\/)?(.*managebuilding\.com)/
   EMAIL_REGEX =  /^(|(([A-Za-z0-9]+_+)|([A-Za-z0-9]+\-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+\-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6})$/i
   PHONE_REGEX = /^((\([\d]+\).*)|(.*\([\d.]{5,}\))|([\d.\- \(\)\/]+\((fax|office)\))?|([\d.\- \(\)\/]{10,}.*)|([\d\-]{8,}.*)|(Joey Gonzalez Cell \(fax\)))$/
 
