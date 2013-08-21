@@ -1,6 +1,6 @@
-project_root = File.dirname(File.absolute_path(__FILE__))
-Dir.glob(File.join(project_root, "/../../app/**/*.rb")).each { |f| require f }
-require File.join(project_root, "/../../core_ext/object/blank")
+project_root = File.join(File.dirname(File.absolute_path(__FILE__)), '/../../')
+Dir.glob(File.join(project_root, "app/**/*.rb")).each { |f| require f }
+require File.join(project_root, 'core_ext/object/blank')
 require 'nokogiri'
 require 'open-uri'
 require 'httparty'
