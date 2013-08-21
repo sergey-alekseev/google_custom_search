@@ -43,8 +43,8 @@ class GoogleCustomSearch
 
   def self.response_links_with_total_results(q, start = 1)
     response_hash = response_hash(q, start)
-    links = response_hash['items'].map { |i| i['link'] }
     total_results = response_hash['searchInformation']['totalResults'].to_i
+    links = total_results == 0 ? [] : response_hash['items'].map { |i| i['link'] }
     [links, total_results]
   end
 
