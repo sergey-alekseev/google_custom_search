@@ -1,4 +1,4 @@
 adapter: sqlite3
-database: db/*.sqlite3
+database: db/contact_infos.sqlite3
 pool: 5
 timeout: 5000

@@ -1,6 +1,8 @@
-set :output, './log/cron_log.log'
+project_root = File.join(File.dirname(File.absolute_path(__FILE__)), '/..')
+set :output, "#{project_root}/log/cron_log.log"
 
-every 1.day, at: '1:05 pm' do
-  command 'ruby run.rb'
-  command 'sqlite3 db/showmojo_managebuilding_contact_infos.sqlite3 < db/import_to_csv.sql'
+every 1.day, at: '1:50 pm' do
+  command "cd #{project_root} && ruby run.rb"
+  command "cd #{project_root} && " \
+    "sqlite3 #{project_root}/db/contact_infos.sqlite3 < #{project_root}/db/import_to_csv.sql"
 end
