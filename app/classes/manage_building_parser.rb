@@ -38,7 +38,7 @@ class ManageBuildingParser
     links, total_results = GoogleCustomSearch.response_links_with_total_results(question, 1)
     LOGGER.info "#{total_results} total results for #{keyword}"
     while start <= 91 && start <= total_results
-      ret = 5
+      ret = 2
       begin
         links << GoogleCustomSearch.response_links(question, start)
       rescue => e
@@ -75,7 +75,7 @@ class ManageBuildingParser
       LOGGER.info "Start scraping contact infos for #{keyword}"
       contact_links = links_for(keyword)
       infos = Parallel.map(contact_links, in_processes: 4, in_threads: 20) do |cl|
-        ret = 5
+        ret = 2
         begin
           contact_info(cl)
         rescue => e
