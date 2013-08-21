@@ -6,3 +6,4 @@ gem 'httparty'
 gem 'aws-sdk'
 gem 'activerecord'
 gem 'sqlite3'
+gem 'whenever', require: false
