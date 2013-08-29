@@ -41,7 +41,7 @@ module Parsers
           infos = Parallel.map(contact_links, in_processes: 4, in_threads: 20) do |cl|
             ret = 2
             begin
-              contact_info(cl).try(:merge, provider: to_s.split('::').last)
+              contact_info(cl)
             rescue => e
               LOGGER.error "#{e} for #{cl}"
               if (ret = ret - 1) > 0

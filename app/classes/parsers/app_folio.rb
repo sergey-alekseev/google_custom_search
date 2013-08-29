@@ -47,7 +47,8 @@ class Parsers::AppFolio < Parsers::Base
           company_name: company_name,
           phone: phones,
           email: email,
-          company_url: company_site_url
+          company_url: company_site_url,
+          provider: 'AppFolio'
         }
       end
 

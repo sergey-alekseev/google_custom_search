@@ -40,7 +40,8 @@ class Parsers::ManageBuilding < Parsers::Base
         phone: phones,
         fax: faxes,
         email: email,
-        total_properties: total_properties("https://#{subdomain}/Resident/PublicPages/ApartmentSearch.aspx")
+        total_properties: total_properties("https://#{subdomain}/Resident/PublicPages/ApartmentSearch.aspx"),
+        provider: 'Buildium'
       }
     rescue => e
       LOGGER.error e
