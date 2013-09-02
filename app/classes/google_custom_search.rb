@@ -5,7 +5,7 @@ require 'yaml'
 require './app/classes/log_factory'
 
 class GoogleCustomSearch
-  CONFIG = YAML.load(File.read('config/gcs.yml'))
+  DEFAULT_CONFIG = YAML.load(File.read('config/gcs.yml'))
   # TODO: remove LOGGER instantiating in several files somehow
   LOGGER = LogFactory.logger('GCS')
 
@@ -50,7 +50,7 @@ class GoogleCustomSearch
 
   private
     def self.request_uri(q, start = 1)
-      key, cx = CONFIG['GCS_KEY'], CONFIG['GCS_CX']
+      key, cx = ENV['GCS_KEY'] || DEFAULT_CONFIG['GCS_KEY'], ENV['GCS_CX'] || DEFAULT_CONFIG['GCS_CX']
       URI.parse("https://www.googleapis.com/customsearch/v1?key=#{key}&cx=#{cx}&q=#{q}&start=#{start}")
     end
 end
