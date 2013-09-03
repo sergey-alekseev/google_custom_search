@@ -1,5 +1,4 @@
 1. Run the following tasks to setup the project:
-```cp proxy.example.yml proxy.yml```
 ```cp database.example.yml database.yml```
 ```cp gcs.example.yml gcs.yml```
 ```rake db:migrate```

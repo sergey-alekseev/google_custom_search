@@ -92,7 +92,7 @@ class Parsers::AppFolio < Parsers::Base
       def get_html_page(url)
         open(url) { |f| f.read }
       rescue OpenURI::HTTPError
-        Proxy.get(url)
+        HTTParty.get(url)
       end
 
       def scrape_email_on_url(url)

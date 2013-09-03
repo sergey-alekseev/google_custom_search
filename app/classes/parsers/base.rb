@@ -16,43 +16,26 @@ module Parsers
     EMAIL_REGEX = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}/i
     PHONE_REGEX = /^((\([\d]+\).*)|(.*\([\d.]{5,}\))|([\d.\- \(\)\/]+\((fax|office)\))?|([\d.\- \(\)\/]{10,}.*)|([\d\-]{8,}.*)|(Joey Gonzalez Cell \(fax\)))$/
 
-    SEMAPHORE = Mutex.new
-
     class << self
-      def parse
-        proxy_ip_rotator = Thread.new do
-          loop {
-            SEMAPHORE.synchronize { Proxy.rotate_ip }
-            sleep(120)
-          }
-        end
-        sleep 10
-        yield
+      def contact_infos_for(keyword)
+        LOGGER.info "Start scraping contact infos for #{keyword}"
+        contact_links = links_for(keyword)
+        infos = Parallel.map(contact_links, in_processes: 4, in_threads: 20) do |cl|
+          ret = 2
+          begin
+            contact_info(cl)
+          rescue => e
+            LOGGER.error "#{e} for #{cl}"
+            if (ret = ret - 1) > 0
+              LOGGER.info "retrying for #{cl}"
+              retry
+            end
+          end
+        end.compact
+        ContactInfo.write(infos)
+        contact_links.size / 10 + 1
       rescue => e
         LOGGER.error e
-      ensure
-        proxy_ip_rotator.kill
-      end
-
-      def contact_infos_for(keyword)
-        parse do
-          LOGGER.info "Start scraping contact infos for #{keyword}"
-          contact_links = links_for(keyword)
-          infos = Parallel.map(contact_links, in_processes: 4, in_threads: 20) do |cl|
-            ret = 2
-            begin
-              contact_info(cl)
-            rescue => e
-              LOGGER.error "#{e} for #{cl}"
-              if (ret = ret - 1) > 0
-                LOGGER.info "retrying for #{cl}"
-                retry
-              end
-            end
-          end.compact
-          ContactInfo.write(infos)
-          contact_links.size / 10 + 1
-        end
       end
 
       def links_for(keyword, start = 11)

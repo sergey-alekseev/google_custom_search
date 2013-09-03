@@ -1,5 +1,4 @@
 .DS_Store
-config/proxy.yml
 config/database.yml
 config/gcs.yml
 log/*.log
