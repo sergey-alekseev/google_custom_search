@@ -46,7 +46,7 @@ class Parsers::ManageBuilding < Parsers::Base
       }
     rescue => e
       LOGGER.error e
-      LOGGER.error "With info: #{info}"
+      LOGGER.error "For link: #{link}"
       nil
     end
 
