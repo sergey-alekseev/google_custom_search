@@ -11,6 +11,7 @@ class Parsers::ManageBuilding < Parsers::Base
     end
 
     def contact_info(link)
+      link.gsub!('http', 'https') unless link.match('https')
       g = open(link) rescue nil # in case when 'contacts' page doesn't exist
       return nil if g.nil?
       info = Nokogiri.HTML(g).at_css('#_ctl0_contentPlaceHolderBody_ucSideBox_lblBody').inner_html.split('<br>')
